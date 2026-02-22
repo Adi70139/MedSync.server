@@ -16,7 +16,6 @@ import com.example.prescripto.Service.Appointment;
 import com.example.prescripto.Utils.APIResponse;
 import com.example.prescripto.Utils.Address;
 import com.example.prescripto.Utils.JwtUtil;
-import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
