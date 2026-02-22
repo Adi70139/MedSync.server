@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(value = "users")
+   // @Cacheable(value = "users")
     public APIResponse findByEmail(String email) {
         System.out.println("Fetching from DB");
         Optional<UserEntity> u1 = userRepo.findByEmail(email);
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @CacheEvict(value = "users", allEntries = true)
+    //@CacheEvict(value = "users", allEntries = true)
     public APIResponse updateUserProfile(String userEmail, UserDTO userDTO) {
         Optional<UserEntity> user=userRepo.findByEmail(userEmail);
         UserEntity currUser = user.get();

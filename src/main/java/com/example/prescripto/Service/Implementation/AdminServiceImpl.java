@@ -85,10 +85,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Caching(evict = {
-            @CacheEvict(value = "doctorsList", allEntries = true),
-            @CacheEvict(value = "doctorProfile", key = "#doctorDTO.email")
-    })
+//    @Caching(evict = {
+//            @CacheEvict(value = "doctorsList", allEntries = true),
+//            @CacheEvict(value = "doctorProfile", key = "#doctorDTO.email")
+//    })
     public APIResponse addDoctor(DoctorDTO doctorDTO) {
 
         DoctorEntity doctorEntity = new DoctorEntity();
@@ -144,7 +144,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Cacheable(value="doctorsList")
+    //@Cacheable(value="doctorsList")
     public List<DoctorDTO> getAllDoctors() {
         System.out.println("Fetching doctors from DB");
         List<DoctorEntity> doctorEntities = doctorRepo.findAll();
@@ -161,8 +161,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @CachePut(value = "doctors", key = "#id")
-    @CacheEvict(value = "doctorsList", allEntries = true, beforeInvocation = true)
+//    @CachePut(value = "doctors", key = "#id")
+//    @CacheEvict(value = "doctorsList", allEntries = true, beforeInvocation = true)
     public DoctorDTO changeAvailability(Long id) {
         DoctorEntity doctor = doctorRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Doctor Not Found!!"));

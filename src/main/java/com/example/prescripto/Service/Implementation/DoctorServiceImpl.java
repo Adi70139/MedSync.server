@@ -75,7 +75,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    @Cacheable(value = "doctorProfile", key = "#email")
+   // @Cacheable(value = "doctorProfile", key = "#email")
     public APIResponse getDoctorProfile(String email) {
         System.out.println("Fetching doctor profile for email: ");
         DoctorEntity doctor = doctorRepo.findByEmail(email);
@@ -93,10 +93,10 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     @Transactional
-    @Caching(evict = {
-            @CacheEvict(value = "doctorsList", allEntries = true, beforeInvocation = true),
-            @CacheEvict(value = "doctorProfile", key = "#email")
-    })
+//    @Caching(evict = {
+//            @CacheEvict(value = "doctorsList", allEntries = true, beforeInvocation = true),
+//            @CacheEvict(value = "doctorProfile", key = "#email")
+//    })
     public APIResponse updateDoctorProfile(String email, DoctorDTO doctorDTO) {
         DoctorEntity doctor = doctorRepo.findByEmail(email);
         if (doctor == null) {
