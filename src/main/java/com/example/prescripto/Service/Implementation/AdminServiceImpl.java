@@ -1,7 +1,6 @@
 package com.example.prescripto.Service.Implementation;
 
-import com.example.prescripto.Adapters.AppointmentEmbeddingAdapter;
-import com.example.prescripto.Adapters.DoctorEmbeddingAdapter;
+
 import com.example.prescripto.DTO.AdminDTO;
 import com.example.prescripto.DTO.AllAppointmentsResDTO;
 import com.example.prescripto.DTO.DoctorDTO;
@@ -66,12 +65,6 @@ public class AdminServiceImpl implements AdminService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private VectorStore vectorStore;
-
-    @Autowired
-    private VectorEmbeddingServiceImpl vectorEmbeddingService;
-
-    @Autowired
     private Appointment appointmentService;
 
     @Autowired
@@ -118,11 +111,6 @@ public class AdminServiceImpl implements AdminService {
 
         doctorEntity.setAddress(address);
         doctorRepo.save(doctorEntity);
-
-
-        vectorEmbeddingService.embed(
-                new DoctorEmbeddingAdapter(doctorEntity)
-        );
 
         // Ensure explicit eviction of any cached profile for this email (in case it existed)
         if (cacheManager != null && doctorDTO != null && doctorDTO.getEmail() != null) {

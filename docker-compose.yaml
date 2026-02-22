@@ -19,14 +19,14 @@ services:
     ports:
       - "6379:6379"
 
-  ollama:
-    image: ollama/ollama:latest
-    container_name: prescripto-ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    restart: unless-stopped
+#  ollama:
+#    image: ollama/ollama:latest
+#    container_name: prescripto-ollama
+#    ports:
+#      - "11434:11434"
+#    volumes:
+#      - ollama_data:/root/.ollama
+#    restart: unless-stopped
 
   app:
     build: .
@@ -36,8 +36,8 @@ services:
         condition: service_started
       redis:
         condition: service_started
-      ollama:
-        condition: service_started
+#      ollama:
+#        condition: service_started
 
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://pgvector:5432/postgres
@@ -45,8 +45,8 @@ services:
       SPRING_DATASOURCE_PASSWORD: 1234
       SPRING_REDIS_HOST: redis
       SPRING_REDIS_PORT: 6379
-      SPRING_AI_VECTORSTORE_PGVECTOR_ENABLED: 'true'
-      SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
+#      SPRING_AI_VECTORSTORE_PGVECTOR_ENABLED: 'true'
+#      SPRING_AI_OLLAMA_BASE_URL: http://ollama:11434
       SERVER_PORT: 8090
     ports:
       - "8090:8090"
@@ -59,4 +59,4 @@ services:
 
 volumes:
   prescripto_pgdata:
-  ollama_data:
+#  ollama_data:
