@@ -40,8 +40,7 @@ public class SecurityConfig {
             CorsConfiguration config= new CorsConfiguration();
             config.setAllowedOrigins(List.of("http://localhost:5174",
                     "http://localhost:5173",
-                    "https://medsync-lwb0.onrender.com",
-                    "https://undistortedly-unslakeable-elliot.ngrok-free.dev"));
+                    "https://medsync-lwb0.onrender.com"));
             config.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS"));
             config.setAllowedHeaders(List.of("*"));
             config.setAllowCredentials(true);
