@@ -1,0 +1,22 @@
+CREATE EXTENSION IF NOT EXISTS vector;
+CREATE EXTENSION IF NOT EXISTS hstore;
+
+CREATE TABLE IF NOT EXISTS vector_store(
+    id TEXT PRIMARY KEY,
+    source_type TEXT NOT NULL,      -- doctor / faq / policy
+    source_id TEXT NOT NULL,        -- actual entity id
+    content TEXT NOT NULL,
+    metadata JSONB,
+    embedding VECTOR(768)
+);
+
+CREATE INDEX IF NOT EXISTS vector_store_embedding_idx
+ON vector_store
+USING HNSW (embedding vector_cosine_ops);
+
+CREATE INDEX IF NOT EXISTS vector_store_source_type_idx
+ON vector_store(source_type);
+
+
+
+

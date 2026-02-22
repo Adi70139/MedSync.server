@@ -1,0 +1,11 @@
+target/
+*.log
+*.tmp
+*.bak
+.git
+.gitignore
+.idea/
+.vscode/
+node_modules/
+uploads/
+
