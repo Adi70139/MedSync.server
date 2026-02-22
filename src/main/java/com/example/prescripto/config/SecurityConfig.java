@@ -35,21 +35,32 @@ public class SecurityConfig {
                 this.authenticationProvider = authenticationProvider;
        }
 
-       @Bean
-       public CorsConfigurationSource corsConfigurationSource() {
-            CorsConfiguration config= new CorsConfiguration();
-            config.setAllowedOrigins(List.of("http://localhost:5174",
-                    "http://localhost:5173",
-                    "https://medsync-lwb0.onrender.com"));
-            config.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS"));
-            config.setAllowedHeaders(List.of("*"));
-            config.setAllowCredentials(true);
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
 
+        configuration.setAllowedOrigins(List.of(
+                "https://medsync-lwb0.onrender.com"
+        ));
 
-           UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", config);
-            return source;
-       }
+        configuration.setAllowedMethods(List.of(
+                "GET", "POST", "PUT", "DELETE", "OPTIONS"
+        ));
+
+        configuration.setAllowedHeaders(List.of("*"));
+
+        configuration.setAllowCredentials(true);
+
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+
 
 
     @Bean
@@ -65,7 +76,7 @@ public class SecurityConfig {
                                 "/uploads/**",
                                 "/api/user/login",
                                 "/api/doctor/list",
-                                "/api/doctor/login" ,"/api/test"
+                                "/api/doctor/login"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
